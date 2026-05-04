@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "userId": 2,
+    "fileName": "bracket_v3.stl",
+    "material": "PLA",
+    "color": "Blanc",
+    "quantity": 2,
+    "notes": "",
+    "price": 100,
+    "status": "shipped",
+    "machineId": 2,
+    "date": "2026-04-20"
+  },
+  {
+    "id": 2,
+    "userId": 2,
+    "fileName": "coque_phone.stl",
+    "material": "PETG",
+    "color": "Noir",
+    "quantity": 1,
+    "notes": "",
+    "price": 70,
+    "status": "done",
+    "machineId": null,
+    "date": "2026-04-19"
+  },
+  {
+    "id": 3,
+    "userId": 3,
+    "fileName": "engrenage.stl",
+    "material": "ABS",
+    "color": "Gris",
+    "quantity": 3,
+    "notes": "",
+    "price": 195,
+    "status": "done",
+    "machineId": null,
+    "date": "2026-04-21"
+  },
+  {
+    "id": 4,
+    "userId": 1,
+    "fileName": "Nouveau document texte.stl",
+    "material": "PLA",
+    "color": "Noir",
+    "quantity": 1,
+    "notes": "",
+    "price": 50,
+    "status": "cancelled",
+    "machineId": null,
+    "date": "2026-05-04"
+  }
+]

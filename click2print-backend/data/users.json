@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Youssef Alami",
+    "email": "youssef@click2print.ma",
+    "password": "123456",
+    "role": "admin",
+    "solde": 1950,
+    "avatar": "YA"
+  },
+  {
+    "id": 2,
+    "name": "Sara Benjelloun",
+    "email": "sara@click2print.ma",
+    "password": "123456",
+    "role": "client",
+    "solde": 500,
+    "avatar": "SB"
+  },
+  {
+    "id": 3,
+    "name": "Karim Idrissi",
+    "email": "karim@click2print.ma",
+    "password": "123456",
+    "role": "operator",
+    "solde": 800,
+    "avatar": "KI"
+  }
+]

@@ -1,0 +1,6 @@
+[
+    { "id": 1, "name": "PLA",    "price": 50,  "color": "#10b981" },
+    { "id": 2, "name": "PETG",   "price": 70,  "color": "#3b82f6" },
+    { "id": 3, "name": "ABS",    "price": 65,  "color": "#f59e0b" },
+    { "id": 4, "name": "Résine", "price": 120, "color": "#8b5cf6" }
+  ]
