@@ -24,6 +24,8 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
     { id: 'assign',     label: 'Assignation'  },
   ]
 
+  
+
   const filteredOrders = orders.filter(o =>
     o.fileName?.toLowerCase().includes(search.toLowerCase()) ||
     String(o.id).includes(search)
@@ -92,7 +94,16 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
         </div>
 
         <nav style={{ padding: '10px 8px', flex: 1 }}>
-          {navItems.map(item => (
+          {navItems
+          
+          .filter(item => {
+            if (user.role === 'operator' && item.id === 'users') {
+              return false
+            }
+      
+            return true
+          })
+          .map(item => (
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
@@ -129,7 +140,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
             </div>
             <div>
               <div style={{ fontSize: 12, fontWeight: 600, color: '#374151' }}>{user?.name}</div>
-              <div style={{ fontSize: 11, color: '#9ca3af' }}>Admin</div>
+              <div style={{ fontSize: 11, color: '#9ca3af' }}>{user.role}</div>
             </div>
           </div>
           <button onClick={onLogout} style={{ fontSize: 12, color: '#9ca3af', background: 'none', border: 'none', cursor: 'pointer' }}>
@@ -273,7 +284,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
           )}
 
           {/* UTILISATEURS */}
-          {activeTab === 'users' && (
+          {activeTab === 'users' && user.role === 'admin' && (
             <div style={S.card}>
               <div style={{ padding: '14px 20px', borderBottom: '1px solid #f9fafb', fontWeight: 600, fontSize: 14, color: '#111827' }}>
                 Utilisateurs ({users.length})
@@ -390,7 +401,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
                           style={{ border: '1px solid #e5e7eb', borderRadius: 8, padding: '6px 10px', fontSize: 12, background: 'white', cursor: 'pointer', outline: 'none' }}
                         >
                           <option value="">Choisir machine...</option>
-                          {machines.filter(m => m.status === 'idle' && m.materials.includes(o.material)).map(m => (
+                          {machines.filter(m =>  m.materials.includes(o.material)).map(m => (
                             <option key={m.id} value={m.id}>{m.name}</option>
                           ))}
                         </select>

@@ -8,7 +8,7 @@
     "quantity": 2,
     "notes": "",
     "price": 100,
-    "status": "shipped",
+    "status": "done",
     "machineId": 2,
     "date": "2026-04-20"
   },
@@ -21,8 +21,8 @@
     "quantity": 1,
     "notes": "",
     "price": 70,
-    "status": "done",
-    "machineId": null,
+    "status": "pending",
+    "machineId": 2,
     "date": "2026-04-19"
   },
   {
@@ -34,7 +34,7 @@
     "quantity": 3,
     "notes": "",
     "price": 195,
-    "status": "done",
+    "status": "pending",
     "machineId": null,
     "date": "2026-04-21"
   },
@@ -47,8 +47,34 @@
     "quantity": 1,
     "notes": "",
     "price": 50,
-    "status": "cancelled",
+    "status": "done",
     "machineId": null,
     "date": "2026-05-04"
+  },
+  {
+    "id": 5,
+    "userId": 1,
+    "fileName": "Nouveau document texte.stl",
+    "material": "PETG",
+    "color": "Noir",
+    "quantity": 6,
+    "notes": "",
+    "price": 420,
+    "status": "printing",
+    "machineId": 1,
+    "date": "2026-05-07"
+  },
+  {
+    "id": 6,
+    "userId": 1,
+    "fileName": "Nouveau document texte.stl",
+    "material": "PLA",
+    "color": "Blanc",
+    "quantity": 1,
+    "notes": "",
+    "price": 50,
+    "status": "shipped",
+    "machineId": 3,
+    "date": "2026-05-07"
   }
 ]
