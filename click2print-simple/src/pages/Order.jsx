@@ -114,7 +114,7 @@ function Order({ user, onCreateOrder, onNavigate }) {
                 {fileName || 'Cliquez pour sélectionner un fichier STL'}
               </div>
               <div style={{ fontSize: 12, color: '#9ca3af' }}>
-                {fileName ? '✅ Fichier sélectionné' : 'Formats acceptés : .stl'}
+                {fileName ? 'Fichier sélectionné' : 'Formats acceptés : .stl'}
               </div>
               <input type="file" accept=".stl" onChange={handleFileChange} style={{ display: 'none' }} />
             </label>

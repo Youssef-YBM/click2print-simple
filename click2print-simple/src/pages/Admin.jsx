@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const statusMap = {
   pending:  { label: 'En attente',    bg: '#fef3c7', color: '#92400e' },
@@ -16,6 +16,11 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
   const [selectedOrder, setSelectedOrder] = useState(null)
   const [message, setMessage] = useState('')
 
+  // Effacer la recherche lors du changement d'onglet
+  useEffect(() => {
+    setSearch('')
+  }, [activeTab])
+
   const navItems = [
     { id: 'dashboard',  label: 'Dashboard'    },
     { id: 'orders',     label: 'Commandes'    },
@@ -24,10 +29,44 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
     { id: 'assign',     label: 'Assignation'  },
   ]
 
-  const filteredOrders = orders.filter(o =>
-    o.fileName?.toLowerCase().includes(search.toLowerCase()) ||
-    String(o.id).includes(search)
-  )
+  const getUserName = (userId) => {
+    const u = (users || []).find(u => u.id === userId)
+    return u ? String(u.name || 'Inconnu') : 'Inconnu'
+  }
+
+  const filteredOrders = (orders || []).filter(o => {
+    const fileName = String(o?.fileName || '').toLowerCase()
+    const id = String(o?.id || '').toLowerCase()
+    const userName = String(getUserName(o?.userId) || '').toLowerCase()
+    const term = String(search || '').toLowerCase()
+    return fileName.includes(term) || id.includes(term) || userName.includes(term)
+  })
+
+  const filteredUsers = (users || []).filter(u => {
+    const name = String(u?.name || '').toLowerCase()
+    const email = String(u?.email || '').toLowerCase()
+    const role = String(u?.role || '').toLowerCase()
+    const term = String(search || '').toLowerCase()
+    return name.includes(term) || email.includes(term) || role.includes(term)
+  })
+
+  const filteredMachines = (machines || []).filter(m => {
+    const name = String(m?.name || '').toLowerCase()
+    const type = String(m?.type || '').toLowerCase()
+    const status = String(m?.status || '').toLowerCase()
+    const term = String(search || '').toLowerCase()
+    return name.includes(term) || type.includes(term) || status.includes(term)
+  })
+
+  // Utilisation de Promises et Async/Await pour la navigation
+  const handleToggleView = async () => {
+    return new Promise((resolve) => {
+      setTimeout(async () => {
+        await onNavigate('dashboard')
+        resolve()
+      }, 100)
+    })
+  }
 
   const stats = [
     { label: 'Total commandes', value: orders.length,                                              color: '#10b981' },
@@ -60,10 +99,6 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
     setTimeout(() => setMessage(''), 2000)
   }
 
-  const getUserName = (userId) => {
-    const u = users.find(u => u.id === userId)
-    return u ? u.name : 'Inconnu'
-  }
 
   const S = {
     page:    { display: 'flex', minHeight: '100vh', background: '#f9fafb', fontFamily: 'system-ui, sans-serif' },
@@ -146,11 +181,19 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
           </h1>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
             {message && <span style={{ fontSize: 13, color: '#059669' }}>{message}</span>}
+            
+            <button 
+              onClick={handleToggleView} 
+              style={{ ...S.btn, background: '#8b5cf6', display: 'flex', alignItems: 'center', gap: 6 }}
+            >
+              <span>🖥️</span> Vue Client
+            </button>
+
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder="Rechercher..."
-              style={{ border: '1px solid #e5e7eb', borderRadius: 10, padding: '7px 12px', fontSize: 13, outline: 'none', width: 200 }}
+              placeholder={`Chercher dans ${(navItems.find(n => n.id === activeTab)?.label || 'tout').toLowerCase()}...`}
+              style={{ border: '1px solid #e5e7eb', borderRadius: 10, padding: '7px 12px', fontSize: 13, outline: 'none', width: 220 }}
             />
             <button onClick={() => onNavigate('order')} style={S.btn}>+ Nouvelle commande</button>
           </div>
@@ -180,7 +223,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
                       <tr>{['ID', 'Client', 'Fichier', 'Prix', 'Statut', 'Action'].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>
                     </thead>
                     <tbody>
-                      {orders.slice(0, 6).map(o => (
+                      {filteredOrders.slice(0, 6).map(o => (
                         <tr key={o.id} style={{ cursor: 'pointer' }} onClick={() => setSelectedOrder(o)}>
                           <td style={{ ...S.td, color: '#10b981', fontWeight: 600 }}>#{o.id}</td>
                           <td style={S.td}>{getUserName(o.userId)}</td>
@@ -211,7 +254,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
                     Machines
                   </div>
                   <div style={{ padding: 16 }}>
-                    {machines.map(m => (
+                    {filteredMachines.map(m => (
                       <div key={m.id} style={{ marginBottom: 14 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -283,7 +326,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
                   <tr>{['Avatar', 'Nom', 'Email', 'Rôle', 'Solde', 'Commandes', 'Action'].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>
                 </thead>
                 <tbody>
-                  {users.map(u => (
+                  {filteredUsers.map(u => (
                     <tr key={u.id}>
                       <td style={S.td}>
                         <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#d1fae5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: '#059669' }}>
@@ -326,7 +369,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
           {/* MACHINES */}
           {activeTab === 'machines' && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 16 }}>
-              {machines.map(m => (
+              {filteredMachines.map(m => (
                 <div key={m.id} style={{
                   background: 'white', borderRadius: 14,
                   border: `1px solid ${m.status === 'error' ? '#fecaca' : '#f3f4f6'}`,
@@ -370,7 +413,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
                   <tr>{['ID', 'Client', 'Fichier', 'Matériau', 'Prix', 'Machine', 'Action'].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>
                 </thead>
                 <tbody>
-                  {orders.filter(o => o.status === 'pending').map(o => (
+                  {filteredOrders.filter(o => o.status === 'pending').map(o => (
                     <tr key={o.id}>
                       <td style={{ ...S.td, color: '#10b981', fontWeight: 600 }}>#{o.id}</td>
                       <td style={S.td}>{getUserName(o.userId)}</td>
@@ -397,7 +440,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
                       </td>
                     </tr>
                   ))}
-                  {orders.filter(o => o.status === 'pending').length === 0 && (
+                  {filteredOrders.filter(o => o.status === 'pending').length === 0 && (
                     <tr>
                       <td colSpan={7} style={{ padding: 30, textAlign: 'center', color: '#9ca3af', fontSize: 13 }}>
                         Aucune commande en attente

@@ -12,6 +12,7 @@ function Dashboard({ user, orders, onLogout, onNavigate, onRecharger }) {
   const [montant, setMontant] = useState(100)
   const [recharging, setRecharging] = useState(false)
   const [message, setMessage] = useState('')
+  const [search, setSearch] = useState('')
 
   // async/await pour recharger le solde
   const handleRecharger = async () => {
@@ -19,14 +20,31 @@ function Dashboard({ user, orders, onLogout, onNavigate, onRecharger }) {
     setMessage('')
     try {
       await onRecharger(montant)
-      setMessage(`✅ ${montant} MAD ajoutés à votre solde !`)
+      setMessage(`${montant} MAD ajoutés à votre solde !`)
     } catch (err) {
-      setMessage('❌ Erreur lors du rechargement')
+      setMessage('Erreur lors du rechargement')
     } finally {
       setRecharging(false)
       // callback après 3 secondes
       setTimeout(() => setMessage(''), 3000)
     }
+  }
+
+  const filteredOrders = (orders || []).filter(o => {
+    const fileName = String(o?.fileName || '').toLowerCase()
+    const id = String(o?.id || '').toLowerCase()
+    const term = String(search || '').toLowerCase()
+    return fileName.includes(term) || id.includes(term)
+  })
+
+  // Utilisation de Promises et Async/Await pour la navigation
+  const handleToggleView = async () => {
+    return new Promise((resolve) => {
+      setTimeout(async () => {
+        await onNavigate('admin')
+        resolve()
+      }, 100)
+    })
   }
 
   const stats = [
@@ -54,6 +72,33 @@ function Dashboard({ user, orders, onLogout, onNavigate, onRecharger }) {
           <span style={{ fontWeight: 700, fontSize: 16, color: '#111827' }}>Click2Print</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          {(user?.role === 'admin' || user?.role === 'operator') && (
+            <button 
+              onClick={handleToggleView} 
+              style={{ 
+                background: '#8b5cf6', color: 'white', border: 'none', 
+                borderRadius: 8, padding: '8px 16px', fontSize: 13, 
+                fontWeight: 500, cursor: 'pointer', display: 'flex', 
+                alignItems: 'center', gap: 6 
+              }}
+            >
+              <span>⚙️</span> Vue Admin
+            </button>
+          )}
+
+          <div style={{ position: 'relative' }}>
+            <input
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder="Rechercher une commande..."
+              style={{ 
+                border: '1px solid #e5e7eb', borderRadius: 10, 
+                padding: '7px 12px', fontSize: 13, outline: 'none', 
+                width: 220, background: '#f9fafb' 
+              }}
+            />
+          </div>
+
           <div style={{
             width: 34, height: 34, borderRadius: '50%',
             background: '#d1fae5', display: 'flex', alignItems: 'center',
@@ -85,7 +130,7 @@ function Dashboard({ user, orders, onLogout, onNavigate, onRecharger }) {
 
         {/* Bienvenue */}
         <h1 style={{ fontSize: 22, fontWeight: 600, color: '#111827', marginBottom: 4 }}>
-          Bonjour, {user?.name} 👋
+          Bonjour, {user?.name}
         </h1>
         <p style={{ fontSize: 14, color: '#9ca3af', marginBottom: 24 }}>
           Gérez vos commandes d'impression 3D
@@ -189,11 +234,11 @@ function Dashboard({ user, orders, onLogout, onNavigate, onRecharger }) {
               Mes commandes
             </span>
             <span style={{ fontSize: 12, color: '#9ca3af' }}>
-              {orders.length} commandes
+              {filteredOrders.length} commandes
             </span>
           </div>
 
-          {orders.length === 0 ? (
+          {filteredOrders.length === 0 ? (
             <div style={{ padding: 40, textAlign: 'center' }}>
               <div style={{ fontSize: 40, marginBottom: 12 }}>📦</div>
               <p style={{ color: '#9ca3af', fontSize: 14 }}>Aucune commande pour l'instant</p>
@@ -222,7 +267,7 @@ function Dashboard({ user, orders, onLogout, onNavigate, onRecharger }) {
                 </tr>
               </thead>
               <tbody>
-                {orders.map(o => (
+                {filteredOrders.map(o => (
                   <tr key={o.id} style={{ borderTop: '1px solid #f9fafb' }}>
                     <td style={{ padding: '12px 16px', color: '#10b981', fontWeight: 500 }}>
                       #{o.id}
