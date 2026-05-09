@@ -1,34 +1,46 @@
 [
-    {
-      "id": 1,
-      "name": "Ender 3 Pro #01",
-      "type": "FDM",
-      "status": "idle",
-      "progress": 0,
-      "materials": ["PLA", "PETG"]
-    },
-    {
-      "id": 2,
-      "name": "Bambu X1 #02",
-      "type": "FDM",
-      "status": "printing",
-      "progress": 65,
-      "materials": ["PLA", "PETG", "ABS"]
-    },
-    {
-      "id": 3,
-      "name": "Prusa MK4 #03",
-      "type": "FDM",
-      "status": "error",
-      "progress": 0,
-      "materials": ["PLA", "ABS"]
-    },
-    {
-      "id": 4,
-      "name": "Elegoo Saturn",
-      "type": "SLA",
-      "status": "idle",
-      "progress": 0,
-      "materials": ["Résine"]
-    }
-  ]
+  {
+    "id": 1,
+    "name": "Ender 3 Pro #01",
+    "type": "FDM",
+    "status": "printing",
+    "progress": 0,
+    "materials": [
+      "PLA",
+      "PETG"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Bambu X1 #02",
+    "type": "FDM",
+    "status": "printing",
+    "progress": 65,
+    "materials": [
+      "PLA",
+      "PETG",
+      "ABS"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Prusa MK4 #03",
+    "type": "FDM",
+    "status": "printing",
+    "progress": 0,
+    "materials": [
+      "PLA",
+      "ABS"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Elegoo Saturn",
+    "type": "SLA",
+    "status": "idle",
+    "progress": 0,
+    "materials": [
+      "Résine"
+    ]
+  }
+]
