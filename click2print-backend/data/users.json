@@ -5,7 +5,7 @@
     "email": "youssef@click2print.ma",
     "password": "123456",
     "role": "admin",
-    "solde": 3660,
+    "solde": 2940,
     "avatar": "YA"
   },
   {
@@ -23,7 +23,7 @@
     "email": "karim@click2print.ma",
     "password": "123456",
     "role": "operator",
-    "solde": 800,
+    "solde": 280,
     "avatar": "KI"
   },
   {
@@ -33,6 +33,16 @@
     "password": "qwerty123",
     "role": "admin",
     "solde": 500,
+    "avatar": "Y",
+    "createdAt": "2026-05-09"
+  },
+  {
+    "id": 5,
+    "name": "Youssef Errami 1",
+    "email": "yousseferrami@gmail.com",
+    "password": "qwerty123",
+    "role": "client",
+    "solde": 360,
     "avatar": "Y",
     "createdAt": "2026-05-09"
   }

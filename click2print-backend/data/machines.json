@@ -37,7 +37,7 @@
     "id": 4,
     "name": "Elegoo Saturn",
     "type": "SLA",
-    "status": "idle",
+    "status": "printing",
     "progress": 0,
     "materials": [
       "Résine"

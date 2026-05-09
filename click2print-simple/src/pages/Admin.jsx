@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 
 const statusMap = {
-  pending:  { label: 'En attente',    bg: '#fef3c7', color: '#92400e' },
+  pending: { label: 'En attente', bg: '#fef3c7', color: '#92400e' },
   printing: { label: 'En impression', bg: '#dbeafe', color: '#1e40af' },
-  done:     { label: 'Terminé',       bg: '#d1fae5', color: '#065f46' },
-  shipped:  { label: 'Expédié',       bg: '#ede9fe', color: '#4c1d95' },
-  cancelled:{ label: 'Annulé',        bg: '#fee2e2', color: '#991b1b' },
+  done: { label: 'Terminé', bg: '#d1fae5', color: '#065f46' },
+  shipped: { label: 'Expédié', bg: '#ede9fe', color: '#4c1d95' },
+  cancelled: { label: 'Annulé', bg: '#fee2e2', color: '#991b1b' },
 }
 
 const statusOptions = ['pending', 'printing', 'done', 'shipped', 'cancelled']
@@ -22,11 +22,11 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
   }, [activeTab])
 
   const navItems = [
-    { id: 'dashboard',  label: 'Dashboard'    },
-    { id: 'orders',     label: 'Commandes'    },
-    { id: 'users',      label: 'Utilisateurs' },
-    { id: 'machines',   label: 'Machines'     },
-    { id: 'assign',     label: 'Assignation'  },
+    { id: 'dashboard', label: 'Dashboard' },
+    { id: 'orders', label: 'Commandes' },
+    { id: 'users', label: 'Utilisateurs' },
+    { id: 'machines', label: 'Machines' },
+    { id: 'assign', label: 'Assignation' },
   ]
 
 
@@ -69,14 +69,14 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
     })
   }
 
-  
-  
+
+
 
   const stats = [
-    { label: 'Total commandes', value: orders.length,                                              color: '#10b981' },
-    { label: 'En attente',      value: orders.filter(o => o.status === 'pending').length,          color: '#f59e0b' },
-    { label: 'En impression',   value: orders.filter(o => o.status === 'printing').length,         color: '#3b82f6' },
-    { label: 'Terminées',       value: orders.filter(o => ['done','shipped'].includes(o.status)).length, color: '#8b5cf6' },
+    { label: 'Total commandes', value: orders.length, color: '#10b981' },
+    { label: 'En attente', value: orders.filter(o => o.status === 'pending').length, color: '#f59e0b' },
+    { label: 'En impression', value: orders.filter(o => o.status === 'printing').length, color: '#3b82f6' },
+    { label: 'Terminées', value: orders.filter(o => ['done', 'shipped'].includes(o.status)).length, color: '#8b5cf6' },
   ]
 
   // async/await pour changer le statut
@@ -105,16 +105,16 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
 
 
   const S = {
-    page:    { display: 'flex', minHeight: '100vh', background: '#f9fafb', fontFamily: 'system-ui, sans-serif' },
+    page: { display: 'flex', minHeight: '100vh', background: '#f9fafb', fontFamily: 'system-ui, sans-serif' },
     sidebar: { width: 210, background: 'white', borderRight: '1px solid #f3f4f6', display: 'flex', flexDirection: 'column', flexShrink: 0 },
-    main:    { flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' },
-    topbar:  { background: 'white', borderBottom: '1px solid #f3f4f6', padding: '12px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
+    main: { flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' },
+    topbar: { background: 'white', borderBottom: '1px solid #f3f4f6', padding: '12px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
     content: { flex: 1, overflowY: 'auto', padding: 24 },
-    card:    { background: 'white', borderRadius: 14, border: '1px solid #f3f4f6', overflow: 'hidden', marginBottom: 20 },
-    th:      { textAlign: 'left', padding: '10px 16px', fontSize: 11, fontWeight: 500, color: '#9ca3af', textTransform: 'uppercase', background: '#f9fafb' },
-    td:      { padding: '11px 16px', fontSize: 13, borderTop: '1px solid #f9fafb' },
-    btn:     { background: '#10b981', color: 'white', border: 'none', borderRadius: 10, padding: '8px 16px', fontSize: 13, fontWeight: 500, cursor: 'pointer' },
-    btnSm:   { background: '#f3f4f6', color: '#374151', border: 'none', borderRadius: 8, padding: '5px 12px', fontSize: 12, cursor: 'pointer' },
+    card: { background: 'white', borderRadius: 14, border: '1px solid #f3f4f6', overflow: 'hidden', marginBottom: 20 },
+    th: { textAlign: 'left', padding: '10px 16px', fontSize: 11, fontWeight: 500, color: '#9ca3af', textTransform: 'uppercase', background: '#f9fafb' },
+    td: { padding: '11px 16px', fontSize: 13, borderTop: '1px solid #f9fafb' },
+    btn: { background: '#10b981', color: 'white', border: 'none', borderRadius: 10, padding: '8px 16px', fontSize: 13, fontWeight: 500, cursor: 'pointer' },
+    btnSm: { background: '#f3f4f6', color: '#374151', border: 'none', borderRadius: 8, padding: '5px 12px', fontSize: 12, cursor: 'pointer' },
   }
 
   return (
@@ -132,38 +132,38 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
 
         <nav style={{ padding: '10px 8px', flex: 1 }}>
           {navItems
-          
-          .filter(item => {
-            if (user.role === 'operator' && item.id === 'users') {
-              return false
-            }
-      
-            return true
-          })
-          .map(item => (
-            <button
-              key={item.id}
-              onClick={() => setActiveTab(item.id)}
-              style={{
-                width: '100%', textAlign: 'left', padding: '9px 12px',
-                borderRadius: 10, fontSize: 13, marginBottom: 2,
-                border: 'none', cursor: 'pointer',
-                background: activeTab === item.id ? '#f0fdf4' : 'transparent',
-                color: activeTab === item.id ? '#059669' : '#6b7280',
-                fontWeight: activeTab === item.id ? 600 : 400,
-              }}
-            >
-              {item.label}
-              {item.id === 'orders' && orders.filter(o => o.status === 'pending').length > 0 && (
-                <span style={{
-                  marginLeft: 6, background: '#10b981', color: 'white',
-                  fontSize: 10, padding: '1px 6px', borderRadius: 10
-                }}>
-                  {orders.filter(o => o.status === 'pending').length}
-                </span>
-              )}
-            </button>
-          ))}
+
+            .filter(item => {
+              if (user.role === 'operator' && item.id === 'users') {
+                return false
+              }
+
+              return true
+            })
+            .map(item => (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(item.id)}
+                style={{
+                  width: '100%', textAlign: 'left', padding: '9px 12px',
+                  borderRadius: 10, fontSize: 13, marginBottom: 2,
+                  border: 'none', cursor: 'pointer',
+                  background: activeTab === item.id ? '#f0fdf4' : 'transparent',
+                  color: activeTab === item.id ? '#059669' : '#6b7280',
+                  fontWeight: activeTab === item.id ? 600 : 400,
+                }}
+              >
+                {item.label}
+                {item.id === 'orders' && orders.filter(o => o.status === 'pending').length > 0 && (
+                  <span style={{
+                    marginLeft: 6, background: '#10b981', color: 'white',
+                    fontSize: 10, padding: '1px 6px', borderRadius: 10
+                  }}>
+                    {orders.filter(o => o.status === 'pending').length}
+                  </span>
+                )}
+              </button>
+            ))}
         </nav>
 
         <div style={{ padding: '12px 16px', borderTop: '1px solid #f3f4f6' }}>
@@ -194,9 +194,9 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
           </h1>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
             {message && <span style={{ fontSize: 13, color: '#059669' }}>{message}</span>}
-            
-            <button 
-              onClick={handleToggleView} 
+
+            <button
+              onClick={handleToggleView}
               style={{ ...S.btn, background: '#8b5cf6', display: 'flex', alignItems: 'center', gap: 6 }}
             >
               Vue Client
@@ -233,31 +233,61 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
                   </div>
                   <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                     <thead>
-                      <tr>{['ID', 'Client', 'Fichier', 'Prix', 'Statut', 'Action'].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>
+                      <tr>
+                        {['ID', 'Client', 'Fichier', 'Prix', 'Statut', 'Action'].map(h => (
+                          <th key={h} style={S.th}>{h}</th>
+                        ))}
+                      </tr>
                     </thead>
                     <tbody>
-                      {filteredOrders.slice(0, 6).map(o => (
-                        <tr key={o.id} style={{ cursor: 'pointer' }} onClick={() => setSelectedOrder(o)}>
-                          <td style={{ ...S.td, color: '#10b981', fontWeight: 600 }}>#{o.id}</td>
-                          <td style={S.td}>{getUserName(o.userId)}</td>
-                          <td style={{ ...S.td, color: '#6b7280' }}>{o.fileName}</td>
-                          <td style={{ ...S.td, fontWeight: 500 }}>{o.price} MAD</td>
-                          <td style={S.td}>
-                            <span style={{ fontSize: 11, fontWeight: 500, padding: '3px 10px', borderRadius: 20, background: statusMap[o.status]?.bg, color: statusMap[o.status]?.color }}>
-                              {statusMap[o.status]?.label}
-                            </span>
-                          </td>
-                          <td style={S.td} onClick={e => e.stopPropagation()}>
-                            <select
-                              value={o.status}
-                              onChange={e => handleStatusChange(o.id, e.target.value)}
-                              style={{ border: '1px solid #e5e7eb', borderRadius: 8, padding: '4px 8px', fontSize: 12, background: 'white', cursor: 'pointer', outline: 'none' }}
-                            >
-                              {statusOptions.map(s => <option key={s} value={s}>{statusMap[s]?.label}</option>)}
-                            </select>
-                          </td>
-                        </tr>
-                      ))}
+                      {[...filteredOrders]
+                        .sort((a, b) => {
+                          // Trier par date si disponible, sinon par ID
+                          if (a.createdAt && b.createdAt) {
+                            return new Date(b.createdAt) - new Date(a.createdAt)
+                          }
+                          return b.id - a.id
+                        })
+                        .slice(0, 10)
+                        .map(o => (
+                          <tr key={o.id} style={{ cursor: 'pointer' }} onClick={() => setSelectedOrder(o)}>
+                            <td style={{ ...S.td, color: '#10b981', fontWeight: 600 }}>#{o.id}</td>
+                            <td style={S.td}>{getUserName(o.userId)}</td>
+                            <td style={{ ...S.td, color: '#6b7280' }}>{o.fileName}</td>
+                            <td style={{ ...S.td, fontWeight: 500 }}>{o.price} MAD</td>
+                            <td style={S.td}>
+                              <span style={{
+                                fontSize: 11,
+                                fontWeight: 500,
+                                padding: '3px 10px',
+                                borderRadius: 20,
+                                background: statusMap[o.status]?.bg,
+                                color: statusMap[o.status]?.color
+                              }}>
+                                {statusMap[o.status]?.label}
+                              </span>
+                            </td>
+                            <td style={S.td} onClick={e => e.stopPropagation()}>
+                              <select
+                                value={o.status}
+                                onChange={e => handleStatusChange(o.id, e.target.value)}
+                                style={{
+                                  border: '1px solid #e5e7eb',
+                                  borderRadius: 8,
+                                  padding: '4px 8px',
+                                  fontSize: 12,
+                                  background: 'white',
+                                  cursor: 'pointer',
+                                  outline: 'none'
+                                }}
+                              >
+                                {statusOptions.map(s => (
+                                  <option key={s} value={s}>{statusMap[s]?.label}</option>
+                                ))}
+                              </select>
+                            </td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </div>
@@ -446,7 +476,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
                           style={{ border: '1px solid #e5e7eb', borderRadius: 8, padding: '6px 10px', fontSize: 12, background: 'white', cursor: 'pointer', outline: 'none' }}
                         >
                           <option value="">Choisir machine...</option>
-                          {machines.filter(m =>  m.materials.includes(o.material)).map(m => (
+                          {machines.filter(m => m.materials.includes(o.material)).map(m => (
                             <option key={m.id} value={m.id}>{m.name}</option>
                           ))}
                         </select>
@@ -483,14 +513,14 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
               <button onClick={() => setSelectedOrder(null)} style={{ background: 'none', border: 'none', fontSize: 18, cursor: 'pointer', color: '#9ca3af' }}>✕</button>
             </div>
             {[
-              { label: 'Client',    value: getUserName(selectedOrder.userId) },
-              { label: 'Fichier',   value: selectedOrder.fileName },
-              { label: 'Matériau',  value: selectedOrder.material },
-              { label: 'Couleur',   value: selectedOrder.color },
-              { label: 'Quantité',  value: selectedOrder.quantity },
-              { label: 'Prix',      value: `${selectedOrder.price} MAD` },
-              { label: 'Date',      value: selectedOrder.date },
-              { label: 'Notes',     value: selectedOrder.notes || '—' },
+              { label: 'Client', value: getUserName(selectedOrder.userId) },
+              { label: 'Fichier', value: selectedOrder.fileName },
+              { label: 'Matériau', value: selectedOrder.material },
+              { label: 'Couleur', value: selectedOrder.color },
+              { label: 'Quantité', value: selectedOrder.quantity },
+              { label: 'Prix', value: `${selectedOrder.price} MAD` },
+              { label: 'Date', value: selectedOrder.date },
+              { label: 'Notes', value: selectedOrder.notes || '—' },
             ].map(row => (
               <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #f3f4f6', fontSize: 13 }}>
                 <span style={{ color: '#9ca3af' }}>{row.label}</span>

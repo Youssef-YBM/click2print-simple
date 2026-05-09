@@ -21,7 +21,7 @@
     "quantity": 1,
     "notes": "",
     "price": 70,
-    "status": "printing",
+    "status": "shipped",
     "machineId": 1,
     "date": "2026-04-19"
   },
@@ -60,7 +60,7 @@
     "quantity": 6,
     "notes": "",
     "price": 420,
-    "status": "printing",
+    "status": "done",
     "machineId": 1,
     "date": "2026-05-07"
   },
@@ -86,7 +86,7 @@
     "quantity": 1,
     "notes": "",
     "price": 70,
-    "status": "printing",
+    "status": "done",
     "machineId": 1,
     "date": "2026-05-09"
   },
@@ -99,6 +99,45 @@
     "quantity": 1,
     "notes": "",
     "price": 50,
+    "status": "cancelled",
+    "machineId": 1,
+    "date": "2026-05-09"
+  },
+  {
+    "id": 9,
+    "userId": 5,
+    "fileName": "40mmcube.stl",
+    "material": "PETG",
+    "color": "Rouge",
+    "quantity": 2,
+    "notes": "bien fini",
+    "price": 140,
+    "status": "printing",
+    "machineId": 2,
+    "date": "2026-05-09"
+  },
+  {
+    "id": 10,
+    "userId": 1,
+    "fileName": "Dragon 2.5_stl.stl",
+    "material": "Résine",
+    "color": "Blanc",
+    "quantity": 6,
+    "notes": "",
+    "price": 720,
+    "status": "shipped",
+    "machineId": 4,
+    "date": "2026-05-09"
+  },
+  {
+    "id": 11,
+    "userId": 3,
+    "fileName": "Audi_R8_2017.stl",
+    "material": "ABS",
+    "color": "Jaune",
+    "quantity": 8,
+    "notes": "",
+    "price": 520,
     "status": "pending",
     "machineId": null,
     "date": "2026-05-09"
