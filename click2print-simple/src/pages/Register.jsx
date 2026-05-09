@@ -108,7 +108,7 @@ function Register({ onRegister, onNavigate }) {
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="Jean Dupont"
+              placeholder="Youssef Errami"
               required
               style={{
                 width: '100%', border: '1px solid #e5e7eb',

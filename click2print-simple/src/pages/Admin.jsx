@@ -83,7 +83,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
   const handleStatusChange = async (orderId, status) => {
     await new Promise(resolve => setTimeout(resolve, 300))
     onUpdateStatus(orderId, status)
-    setMessage(`✅ Statut mis à jour`)
+    setMessage(`Statut mis à jour`)
     setTimeout(() => setMessage(''), 2000)
   }
 
@@ -91,7 +91,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
   const handleAssign = async (orderId, machineId) => {
     await new Promise(resolve => setTimeout(resolve, 300))
     onAssignMachine(orderId, parseInt(machineId))
-    setMessage(`✅ Machine assignée`)
+    setMessage(`Machine assignée`)
     setTimeout(() => setMessage(''), 2000)
   }
 
@@ -99,7 +99,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
   const handleRoleChange = async (userId, role) => {
     await new Promise(resolve => setTimeout(resolve, 300))
     onUpdateRole(userId, role)
-    setMessage(`✅ Rôle mis à jour`)
+    setMessage(`Rôle mis à jour`)
     setTimeout(() => setMessage(''), 2000)
   }
 

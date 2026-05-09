@@ -22,7 +22,7 @@
     "name": "Karim Idrissi",
     "email": "karim@click2print.ma",
     "password": "123456",
-    "role": "client",
+    "role": "operator",
     "solde": 800,
     "avatar": "KI"
   },
@@ -31,7 +31,7 @@
     "name": "YOUSSEF ERRAMI",
     "email": "yousseferrami1008@gmail.com",
     "password": "qwerty123",
-    "role": "client",
+    "role": "admin",
     "solde": 500,
     "avatar": "Y",
     "createdAt": "2026-05-09"
