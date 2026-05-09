@@ -8,7 +8,7 @@
     "quantity": 2,
     "notes": "",
     "price": 100,
-    "status": "done",
+    "status": "shipped",
     "machineId": 2,
     "date": "2026-04-20"
   },
@@ -21,8 +21,8 @@
     "quantity": 1,
     "notes": "",
     "price": 70,
-    "status": "pending",
-    "machineId": 2,
+    "status": "printing",
+    "machineId": 1,
     "date": "2026-04-19"
   },
   {
