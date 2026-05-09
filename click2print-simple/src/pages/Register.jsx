@@ -1,18 +1,47 @@
 import { useState } from 'react'
 
-function Login({ onLogin, onNavigate }) {  // ← AJOUTER onNavigate
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+function Register({ onRegister, onNavigate }) {
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  // async/await pour la connexion
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+    setError('')
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    
+    // Validation
+    if (!form.name.trim()) {
+      setError('Le nom est requis')
+      return
+    }
+    if (!form.email.trim()) {
+      setError('L\'email est requis')
+      return
+    }
+    if (form.password.length < 6) {
+      setError('Le mot de passe doit contenir au moins 6 caractères')
+      return
+    }
+    if (form.password !== form.confirmPassword) {
+      setError('Les mots de passe ne correspondent pas')
+      return
+    }
+
     setLoading(true)
     try {
-      await onLogin(email, password)
+      await onRegister(form.name, form.email, form.password)
+      // Redirection après inscription réussie
+      setTimeout(() => onNavigate('login'), 1500)
     } catch (err) {
       setError(err.message)
     } finally {
@@ -51,10 +80,10 @@ function Login({ onLogin, onNavigate }) {  // ← AJOUTER onNavigate
         </div>
 
         <h1 style={{ fontSize: 22, fontWeight: 600, color: '#111827', marginBottom: 6 }}>
-          Connexion
+          Inscription
         </h1>
         <p style={{ fontSize: 14, color: '#9ca3af', marginBottom: 24 }}>
-          Accédez à votre espace impression 3D
+          Créez votre compte pour commander
         </p>
 
         {/* Erreur */}
@@ -72,13 +101,54 @@ function Login({ onLogin, onNavigate }) {  // ← AJOUTER onNavigate
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: 16 }}>
             <label style={{ fontSize: 13, fontWeight: 500, color: '#374151', display: 'block', marginBottom: 6 }}>
+              Nom complet
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="Jean Dupont"
+              required
+              style={{
+                width: '100%', border: '1px solid #e5e7eb',
+                borderRadius: 10, padding: '10px 14px',
+                fontSize: 14, outline: 'none',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+
+          <div style={{ marginBottom: 16 }}>
+            <label style={{ fontSize: 13, fontWeight: 500, color: '#374151', display: 'block', marginBottom: 6 }}>
               Email
             </label>
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              value={form.email}
+              onChange={handleChange}
               placeholder="vous@example.com"
+              required
+              style={{
+                width: '100%', border: '1px solid #e5e7eb',
+                borderRadius: 10, padding: '10px 14px',
+                fontSize: 14, outline: 'none',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+
+          <div style={{ marginBottom: 16 }}>
+            <label style={{ fontSize: 13, fontWeight: 500, color: '#374151', display: 'block', marginBottom: 6 }}>
+              Mot de passe
+            </label>
+            <input
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="•••••••• (min. 6 caractères)"
               required
               style={{
                 width: '100%', border: '1px solid #e5e7eb',
@@ -91,12 +161,13 @@ function Login({ onLogin, onNavigate }) {  // ← AJOUTER onNavigate
 
           <div style={{ marginBottom: 24 }}>
             <label style={{ fontSize: 13, fontWeight: 500, color: '#374151', display: 'block', marginBottom: 6 }}>
-              Mot de passe
+              Confirmer le mot de passe
             </label>
             <input
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="confirmPassword"
+              value={form.confirmPassword}
+              onChange={handleChange}
               placeholder="••••••••"
               required
               style={{
@@ -115,33 +186,24 @@ function Login({ onLogin, onNavigate }) {  // ← AJOUTER onNavigate
               width: '100%', background: loading ? '#9ca3af' : '#10b981',
               color: 'white', border: 'none', borderRadius: 10,
               padding: '12px 0', fontSize: 15, fontWeight: 500,
-              cursor: loading ? 'not-allowed' : 'pointer',
-              transition: 'background 0.2s'
+              cursor: loading ? 'not-allowed' : 'pointer'
             }}
           >
-            {loading ? 'Connexion...' : 'Se connecter →'}
+            {loading ? 'Inscription en cours...' : 'S\'inscrire →'}
           </button>
         </form>
 
-        {/*  NOUVEAU : Lien vers l'inscription */}
-        <p style={{ textAlign: 'center', marginTop: 16, fontSize: 13, color: '#6b7280' }}>
-          Pas encore de compte ?{' '}
+        <p style={{ textAlign: 'center', marginTop: 24, fontSize: 13, color: '#6b7280' }}>
+          Déjà un compte ?{' '}
           <button
-            onClick={() => onNavigate('register')}
-            style={{
-              color: '#10b981',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontWeight: 500,
-              fontSize: 13
-            }}
+            onClick={() => onNavigate('login')}
+            style={{ color: '#10b981', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 500 }}
           >
-            S'inscrire gratuitement
+            Se connecter
           </button>
         </p>
 
-        {/* Comptes de test */}
+        {/* Comptes de test (gardés) */}
         <div style={{
           marginTop: 24, background: '#f9fafb',
           borderRadius: 10, padding: '12px 14px',
@@ -157,7 +219,7 @@ function Login({ onLogin, onNavigate }) {  // ← AJOUTER onNavigate
           ].map(c => (
             <div
               key={c.role}
-              onClick={() => { setEmail(c.email); setPassword('123456') }}
+              onClick={() => onNavigate('login')}
               style={{
                 fontSize: 12, color: '#10b981',
                 cursor: 'pointer', marginBottom: 4,
@@ -177,4 +239,4 @@ function Login({ onLogin, onNavigate }) {  // ← AJOUTER onNavigate
   )
 }
 
-export default Login
+export default Register

@@ -5,7 +5,7 @@
     "email": "youssef@click2print.ma",
     "password": "123456",
     "role": "admin",
-    "solde": 3780,
+    "solde": 3660,
     "avatar": "YA"
   },
   {
@@ -22,8 +22,18 @@
     "name": "Karim Idrissi",
     "email": "karim@click2print.ma",
     "password": "123456",
-    "role": "operator",
+    "role": "client",
     "solde": 800,
     "avatar": "KI"
+  },
+  {
+    "id": 4,
+    "name": "YOUSSEF ERRAMI",
+    "email": "yousseferrami1008@gmail.com",
+    "password": "qwerty123",
+    "role": "client",
+    "solde": 500,
+    "avatar": "Y",
+    "createdAt": "2026-05-09"
   }
 ]

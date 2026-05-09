@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService) { }
 
   // GET /users → tous les utilisateurs (sans password)
   @Get()
@@ -28,4 +28,10 @@ export class UsersController {
   updateRole(@Param('id') id: string, @Body() body: { role: string }) {
     return this.usersService.updateRole(Number(id), body.role);
   }
+  // POST /users/register → { name, email, password }
+  @Post('register')
+  register(@Body() body: { name: string; email: string; password: string }) {
+    return this.usersService.register(body.name, body.email, body.password);
+  }
+
 }

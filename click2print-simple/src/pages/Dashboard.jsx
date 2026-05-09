@@ -82,7 +82,7 @@ function Dashboard({ user, orders, onLogout, onNavigate, onRecharger }) {
                 alignItems: 'center', gap: 6 
               }}
             >
-              <span>⚙️</span> Vue Admin
+              Vue Admin
             </button>
           )}
 

@@ -199,7 +199,7 @@ function Admin({ user, orders, users, machines, onLogout, onUpdateStatus, onAssi
               onClick={handleToggleView} 
               style={{ ...S.btn, background: '#8b5cf6', display: 'flex', alignItems: 'center', gap: 6 }}
             >
-              <span>🖥️</span> Vue Client
+              Vue Client
             </button>
 
             <input

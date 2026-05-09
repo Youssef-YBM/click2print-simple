@@ -34,8 +34,8 @@
     "quantity": 3,
     "notes": "",
     "price": 195,
-    "status": "pending",
-    "machineId": null,
+    "status": "printing",
+    "machineId": 3,
     "date": "2026-04-21"
   },
   {
@@ -76,5 +76,31 @@
     "status": "shipped",
     "machineId": 3,
     "date": "2026-05-07"
+  },
+  {
+    "id": 7,
+    "userId": 1,
+    "fileName": "xyz-plate.stl",
+    "material": "PETG",
+    "color": "Bleu",
+    "quantity": 1,
+    "notes": "",
+    "price": 70,
+    "status": "printing",
+    "machineId": 1,
+    "date": "2026-05-09"
+  },
+  {
+    "id": 8,
+    "userId": 1,
+    "fileName": "stl_Resp_Peform-Filter_Adaptor-850.STL",
+    "material": "PLA",
+    "color": "Blanc",
+    "quantity": 1,
+    "notes": "",
+    "price": 50,
+    "status": "pending",
+    "machineId": null,
+    "date": "2026-05-09"
   }
 ]

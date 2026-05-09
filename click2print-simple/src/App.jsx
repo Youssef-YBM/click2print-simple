@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Admin from './pages/Admin'
 import Order from './pages/Order'
+import Register from './pages/Register'  // ← AJOUTER CET IMPORT
 
 // URL du backend NestJS
 const API = 'http://localhost:3000'
@@ -52,6 +53,23 @@ function App() {
         })
         .catch(() => reject(new Error('Erreur de connexion au serveur')))
     })
+  }
+
+  // NOUVELLE FONCTION : Inscription
+  const handleRegister = async (name, email, password) => {
+    const res = await fetch(`${API}/users/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password })
+    })
+
+    const data = await res.json()
+    if (!res.ok) throw new Error(data.message || 'Erreur lors de l\'inscription')
+    
+    // Optionnel : Connecter automatiquement après inscription
+    // await handleLogin(email, password)
+    
+    return data
   }
 
   // Déconnexion
@@ -146,10 +164,14 @@ function App() {
     })
   }
 
+  // AJOUTEZ LA PAGE REGISTER DANS LE RENDU
   return (
     <div>
       {page === 'login' && (
-        <Login onLogin={handleLogin} />
+        <Login onLogin={handleLogin} onNavigate={setPage} />
+      )}
+      {page === 'register' && (  // ← NOUVEAU : Page d'inscription
+        <Register onRegister={handleRegister} onNavigate={setPage} />
       )}
       {page === 'dashboard' && (
         <Dashboard
